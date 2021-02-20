@@ -1,0 +1,74 @@
+.register-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+.title{
+    color: #002071;
+    font-weight: 600;
+    font-size: 2em;
+    margin-top: -2em;
+}
+.register-form{
+    border-radius: 5px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    padding: 1em;
+    background-color: #0d47a1;
+}
+.register-form h2{
+    text-align: left;
+    font-weight: 300;
+    font-size: 1.5em;
+    margin-bottom: 0.7em;
+    color: #fff;
+}
+.btnSubmit{
+    background-color: #fff;
+    border: none;
+    border-radius: 1rem;
+    color: #002071;
+    cursor: pointer;
+    display: block;
+    padding: 1.5%;
+    width: 50%;
+    transition: 0.3s;
+}
+.btnSubmit:hover{
+    background-color: rgb(221, 221, 221);
+}
+.btnSubmit:active{
+    background-color: rgb(185, 185, 185);
+}
+
+.register-form .ForgetPwd{
+    color: #002071;
+    font-weight: 600;
+    text-decoration: none;
+}
+.already-registered{
+    color: #fff;
+}
+.already-registered:hover{
+    color: rgb(136, 136, 136);
+}
+@media only screen and (min-width: 300px) {
+    /* For mobile phones: */
+    .register-form{
+        width: 90%;
+    }
+}
+@media only screen and (min-width: 600px) {
+    /* For mobile phones: */
+    .register-form{
+        width: 66%;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    /* For mobile phones: */
+    .register-form{
+        width: 50%;
+    }
+}
