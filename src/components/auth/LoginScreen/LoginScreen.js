@@ -15,6 +15,7 @@ export const LoginScreen = () => {
                     <input 
                         type="text"
                         className="form-control"
+                        autoComplete='off'
                         name='email'
                         placeholder="Email"
                     />
