@@ -1,51 +1,37 @@
 import React, { useState } from 'react'
 import { Calendar, momentLocalizer } from 'react-big-calendar'
-import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
+import { useDispatch, useSelector } from 'react-redux'
+// import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import moment from 'moment'
 import { Navbar } from '../ui/Navbar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import './CalendarScreen.css'
 import { CalendarEvent } from './CalendarEvent'
 import { CalendarModal } from './CalendarModal'
+import { uiOpenModal } from '../../actions/ui'
+import { eventSetActive } from '../../actions/events'
+import { AddNewFab } from '../ui/AddNewFab'
 
+// TODO: implement drag and drop for this calendar
+// const DragAndDropCalendar = withDragAndDrop(Calendar)
 
 const localizer = momentLocalizer(moment)
-const myEventsList = [
-    {
-        title: 'My birthday',
-        start: moment().toDate(),
-        end: moment().add(2,'hours').toDate(),
-        bgcolor: '#fafa',
-        notes: 'Comprar pastel',
-        user: {
-            _id: '123',
-            name: 'Luis Ivan'
-        },
-    },
-    {
-        title: 'Uvas birthday',
-        start: moment().add(1,'day').toDate(),
-        end: moment().add(3,'hours').add(1,'day').toDate(),
-        bgcolor: '#00AAAA',
-        notes: 'Comprar pastel',
-        user: {
-            _id: '123',
-            name: 'Luis Fernado'
-        },
-    }
-]
 
-const DragAndDropCalendar = withDragAndDrop(Calendar)
 
 export const CalendarScreen = () => {
 
+    const dispatch = useDispatch();
+    const { events } = useSelector(state => state.calendar)
     const [lastView, setLastView] = useState(localStorage.getItem('lastView')  || 'month');
-    console.log(lastView);
-    const onDoubleClick = (e) =>{
-        console.log('DOUBLE',e);
+
+    // Double click on event -> Open modal
+    const onDoubleClick = (e) => {
+        dispatch(uiOpenModal());
+        // TODO: add event to state
     }
-    const onSelectEvent = (e) =>{
-        console.log('SELECTED',e);
+
+    const onSelectEvent = (e) => {
+        dispatch(eventSetActive(e));
     }
 
     const onViewChange = (e) => {
@@ -70,9 +56,9 @@ export const CalendarScreen = () => {
         <div className='calendar-screen'>
             <Navbar />
             <div className='mx-4 mb-4 calendar'>
-                <DragAndDropCalendar
+                <Calendar
                     localizer={localizer}
-                    events={myEventsList}
+                    events={events}
                     startAccessor="start"
                     endAccessor="end"
                     eventPropGetter={eventStyleGetter}
@@ -85,6 +71,7 @@ export const CalendarScreen = () => {
                     }}
                 />
             </div>
+            <AddNewFab />
             <CalendarModal />
         </div>
     )
