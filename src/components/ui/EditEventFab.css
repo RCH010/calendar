@@ -1,0 +1,28 @@
+.fab-edit{
+	border: 2px solid #1e88e5;
+	background-color: #1e88e5;
+    color: white;
+	font-size: 16px;
+	height: 2.5em;
+	width: 2.5em;
+	border-radius: 999px;
+	position: fixed;
+    bottom: 5.5em;
+    right: 2em;
+    transition: 0.3s;
+}
+.fab-edit-icon{
+    color: inherit;
+    font-size: .95em;
+    margin: 0 -.22em .3em 0;
+}
+.fab-edit:hover{
+    border: 2px solid #6ab7ff;
+	background-color:#6ab7ff;
+    color: #e4e4e4;
+}
+.fab-edit:active{
+    border: 2px solid #c4e9ff;
+	background-color:#c4e9ff;
+    color: #e9e9e9;
+}

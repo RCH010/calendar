@@ -6,7 +6,7 @@
 	width: 2.5em;
 	border-radius: 999px;
 	position: fixed;
-    bottom: 2em;
+    bottom: 1.5em;
     right: 2em;	
     transition: 0.3s;
 }
@@ -43,4 +43,8 @@
 .plus-button:active {
     background-color: #5695f3;
     border: 2px solid #5695f3;
+}
+.plus-button:disabled {
+    background-color: #b2c3dd;
+    border: 2px solid #b2c3dd;
 }
