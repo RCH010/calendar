@@ -9,8 +9,10 @@ import './CalendarScreen.css'
 import { CalendarEvent } from './CalendarEvent'
 import { CalendarModal } from './CalendarModal'
 import { uiOpenModal } from '../../actions/ui'
-import { eventSetActive } from '../../actions/events'
+import { eventClearActiveEvent, eventSetActive } from '../../actions/events'
 import { AddNewFab } from '../ui/AddNewFab'
+import { DeleteEventFab } from '../ui/DeleteEventFab'
+import { EditEventFab } from '../ui/EditEventFab'
 
 // TODO: implement drag and drop for this calendar
 // const DragAndDropCalendar = withDragAndDrop(Calendar)
@@ -21,13 +23,12 @@ const localizer = momentLocalizer(moment)
 export const CalendarScreen = () => {
 
     const dispatch = useDispatch();
-    const { events } = useSelector(state => state.calendar)
+    const { events, activeEvent } = useSelector(state => state.calendar)
     const [lastView, setLastView] = useState(localStorage.getItem('lastView')  || 'month');
 
     // Double click on event -> Open modal
     const onDoubleClick = (e) => {
         dispatch(uiOpenModal());
-        // TODO: add event to state
     }
 
     const onSelectEvent = (e) => {
@@ -52,6 +53,10 @@ export const CalendarScreen = () => {
         }
     }
 
+    const onSelectSlot = (e) => {
+        dispatch(eventClearActiveEvent());
+    }
+
     return (
         <div className='calendar-screen'>
             <Navbar />
@@ -65,13 +70,25 @@ export const CalendarScreen = () => {
                     onDoubleClickEvent={onDoubleClick}
                     onSelectEvent={onSelectEvent}
                     onView={onViewChange}
+                    onSelectSlot={onSelectSlot}
+                    selectable={true}
                     view={lastView}
                     components={{
                         event:CalendarEvent
                     }}
                 />
             </div>
-            <AddNewFab />
+            {
+                (activeEvent && ( <>
+                    <DeleteEventFab />
+                    <EditEventFab />
+                    </>
+                )) 
+            }
+            <AddNewFab 
+                disabled={activeEvent}
+            />
+            
             <CalendarModal />
         </div>
     )

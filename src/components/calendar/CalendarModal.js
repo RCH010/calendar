@@ -70,15 +70,15 @@ export const CalendarModal = () => {
             setStartDate(activeEvent.start);
             setEndDate(activeEvent.end);
         }else{
-            setStartDate(startDateDefault.start);
-            setEndDate(endDateDefault.end);
+            setStartDate(startDateDefault.toDate());
+            setEndDate(endDateDefault.toDate());
         }
     }, [activeEvent])
 
     // useForm hook for formValues
     const [formValues, handleInputChange, reset] = useForm(initFormValues)
     const {notes, title, start, end} = formValues;
-    console.log(formValues);
+    
     const saveEvent = () => {
         // update or create new event
         if(activeEvent) {
@@ -108,7 +108,6 @@ export const CalendarModal = () => {
         if(title.trim().length < 1) {
             return setTitleValid(false);
         }else { setTitleValid(true); }
-        console.log('???');
         saveEvent();
         closeModal();
     }
@@ -129,7 +128,7 @@ export const CalendarModal = () => {
             className='modal'
             overlayClassName='modal-fondo'
         >
-            <h1> New event </h1>
+            <h1>{(activeEvent)? 'Edit event' : 'New Event'}</h1>
             <hr />
             <form 
                 className="container"
